@@ -5,7 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"image"
-	"image/png"
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
 	"io"
 	iofs "io/fs"
 	"log"
@@ -17,13 +19,14 @@ import (
 
 	"bazil.org/fuse"
 	"bazil.org/fuse/fs"
+	_ "golang.org/x/image/webp"
 )
 
 var progName = filepath.Base(os.Args[0])
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage of %s:\n", progName)
-	fmt.Fprintf(os.Stderr, "  %s IMAGE.png MOUNTPOINT\n", progName)
+	fmt.Fprintf(os.Stderr, "  %s IMAGE MOUNTPOINT\n", progName)
 	flag.PrintDefaults()
 }
 
@@ -54,7 +57,7 @@ func mount(path, mountpoint string) error {
 	}
 	defer reader.Close() //nolint:errcheck
 
-	img, err := png.Decode(reader)
+	img, _, err := image.Decode(reader)
 	if err != nil {
 		return fmt.Errorf("decoding: %w", err)
 	}
