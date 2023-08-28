@@ -1,9 +1,11 @@
 # imgfs
 
 imgfs lets you mount an image as a [FUSE] userspace file system. It uses
-[bazil.org/fuse][bazil], a pure-Go implementation of FUSE.
+[bazil.org/fuse][bazil], a pure-Go implementation of FUSE, and is heavily based
+on [zipfs].
 
 [bazil]: <https://github.com/bazil/fuse>
+[zipfs]: <https://github.com/bazil/zipfs>
 
 ## Usage
 
@@ -69,6 +71,14 @@ $ head mnt/row0/col0/*
 ```
 
 So the pixel at (0,0) has RGB values of (255,0,0), i.e., is full red.
+
+To stop and unmount, first kill the job, then unmount:
+
+```sh
+kill %1
+fusermount -u mnt   # Linux
+umount mnt          # macOS
+```
 
 ## Limitations
 
