@@ -80,6 +80,15 @@ fusermount -u mnt   # Linux
 umount mnt          # macOS
 ```
 
+## Debug mode
+
+To get debug output, set an environment variable `IMGFS_DEBUG` to a non-empty
+value:
+
+```sh
+IMGFS_DEBUG=true imgfs image.png mnt &
+```
+
 ## Limitations
 
 - The file system is read-only
