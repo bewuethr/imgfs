@@ -91,6 +91,7 @@ IMGFS_DEBUG=true imgfs image.png mnt &
 
 ## Limitations
 
+- Images are assumed to be opaque, no transparency
 - The file system is read-only
 - Probably a bunch of bugs
 
